@@ -1,4 +1,4 @@
-FROM node
+FROM quay.io/ibmgaragecloud/node:lts-stretch
 
 ENV NODE_ENV=production
 WORKDIR /app
@@ -6,4 +6,5 @@ WORKDIR /app
 COPY . .
 RUN npm install 
 
-CMD [ "node", "server.js" ]
+EXPOSE 3000
+CMD ["npm", "start"]
