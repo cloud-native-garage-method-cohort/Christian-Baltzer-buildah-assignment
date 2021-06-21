@@ -1,0 +1,31 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: christian-baltzer-buildah-assignment
+spec:
+  workspaces:
+    - name: buildah-assignment-shared-data
+  tasks:
+  - name: clone-repository
+    taskRef:
+      name: git-clone
+      kind: ClusterTask
+    params:
+      - name: url
+        value: https://github.com/cloud-native-garage-method-cohort/Christian-Baltzer-buildah-assignment
+    workspaces:
+    - name: output
+      workspace: buildah-assignment-shared-data
+  - name: build-image
+    taskRef:
+      name: buildah
+      kind: ClusterTask
+    params:
+      - name: IMAGE
+        value: quay.io/darker/buildah
+    workspaces:
+      - name: source
+        workspace: buildah-assignment-shared-data
+    runAfter: 
+      - clone-repository
+      

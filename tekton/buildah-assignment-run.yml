@@ -1,0 +1,17 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: christian-baltzer-buildah-assignment-run
+spec:
+  serviceAccountName: build-bot
+  pipelineRef:
+    name: christian-baltzer-buildah-assignment
+  workspaces:
+    - name: buildah-assignment-shared-data
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 1Gi
