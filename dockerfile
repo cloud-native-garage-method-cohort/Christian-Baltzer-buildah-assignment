@@ -1,7 +1,6 @@
 FROM quay.io/ibmgaragecloud/node:lts-stretch
 
-ENV NODE_ENV=production
-WORKDIR /app
+WORKDIR /home/node
 
 COPY . .
 RUN npm install 
